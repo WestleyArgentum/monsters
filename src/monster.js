@@ -3,18 +3,21 @@
 
     var MONSTER_MORPH_EPSILON = 0.02,
         MONSTER_MORPH_RATE = 0.0125;
+        MONSTER_BASE_SIZE = 200,
+        MONSTER_BASE_EYE_OUTER = 24,
+        MONSTER_BASE_EYE_INNER = 13;
 
     var Monster = root.Monster = function(two, x, y) {
-        var blob = this.blob = two.makeCircle(0, 0, two.height / 3);
-        blob.fill = 'purple';
-        blob.noStroke();
-        randBodyDestinations(blob);
+        this.blob = two.makeCircle(0, 0, MONSTER_BASE_SIZE);
+        this.blob.fill = 'purple';
+        this.blob.noStroke();
+        randBodyDestinations(this.blob);
 
-        var rightEye = createEye(two, 30, 0);
-        var leftEye = createEye(two, -30, 0);
+        this.rightEye = createEye(two, 30, 0);
+        this.leftEye = createEye(two, -30, 0);
 
-        var monsterBody = two.makeGroup(blob, rightEye, leftEye);
-        monsterBody.translation.set(x, y);
+        this.whole = two.makeGroup(this.blob, this.rightEye, this.leftEye);
+        this.whole.translation.set(x, y);
     }
 
     Monster.prototype.update = function() {
@@ -35,11 +38,11 @@
     // *******
 
     function createEye(two, x, y) {
-        var eyeOuter = two.makeCircle(0, 0, 25);
+        var eyeOuter = two.makeCircle(0, 0, MONSTER_BASE_EYE_OUTER);
         eyeOuter.fill = 'violet';
         eyeOuter.noStroke();
 
-        var eyeInner = two.makeCircle(0, 0, 13);
+        var eyeInner = two.makeCircle(0, 0, MONSTER_BASE_EYE_INNER);
         eyeInner.fill = 'black';
 
         var eye = two.makeGroup(eyeOuter, eyeInner);
@@ -55,7 +58,7 @@
     function randBodyDestination(blob, i) {
         var pct = (i + 1) / blob.vertices.length;
         var theta = pct * Math.PI * 2;
-        var radius = Math.max(Math.random(), 0.3) * 200 + 40;
+        var radius = Math.max(Math.random(), 0.4) * MONSTER_BASE_SIZE;
         var x = radius * Math.cos(theta);
         var y = radius * Math.sin(theta);
         return new Two.Vector(x, y);
