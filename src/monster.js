@@ -9,22 +9,10 @@
         blob.fill = 'purple';
         blob.noStroke();
 
-        var eyeRightOuter = two.makeCircle(two.width / 2 + 30, two.height / 2, two.height / 30);
-        eyeRightOuter.fill = 'violet'
-        eyeRightOuter.noStroke();
+        createEye(two, two.width / 2 + 30, two.height / 2);
+        createEye(two, two.width / 2 - 30, two.height / 2);
 
-
-        var eyeRightInner = two.makeCircle(two.width / 2 + 30, two.height / 2, two.height / 50);
-        eyeRightInner.fill = 'black';
-
-        var eyeLeftOuter = two.makeCircle(two.width / 2 - 30, two.height / 2, two.height / 30);
-        eyeLeftOuter.fill = 'violet'
-        eyeLeftOuter.noStroke();
-
-        var eyeLeftInner = two.makeCircle(two.width / 2 - 30, two.height / 2, two.height / 50);
-        eyeLeftInner.fill = 'black';
-
-        randDestinations(blob);
+        randBodyDestinations(blob);
     }
 
     Monster.prototype.update = function() {
@@ -33,7 +21,7 @@
             var d = v.destination;
 
             if (v.distanceTo(d) < MONSTER_MORPH_EPSILON) {
-                v.destination = randDestination(this.blob, i);
+                v.destination = randBodyDestination(this.blob, i);
                 continue;
             }
 
@@ -44,7 +32,20 @@
 
     // *******
 
-    function randDestination(blob, i) {
+    function createEye(two, x, y) {
+        var eyeLeftOuter = two.makeCircle(x, y, 25);
+        eyeLeftOuter.fill = 'violet';
+        eyeLeftOuter.noStroke();
+
+        var eyeLeftInner = two.makeCircle(x, y, 13);
+        eyeLeftInner.fill = 'black';
+    }
+
+    function scaleEye(eye, scaleOuter, scaleInner) {
+
+    }
+
+    function randBodyDestination(blob, i) {
         var pct = (i + 1) / blob.vertices.length;
         var theta = pct * Math.PI * 2;
         var radius = Math.max(Math.random(), 0.3) * 200 + 40;
@@ -53,10 +54,10 @@
         return new Two.Vector(x, y);
     }
 
-    function randDestinations(blob) {
+    function randBodyDestinations(blob) {
         for (var i = 0; i < blob.vertices.length; i++) {
             var v = blob.vertices[i];
-            v.destination = new randDestination(blob, i);
+            v.destination = new randBodyDestination(blob, i);
         }
     }
 
