@@ -14,7 +14,7 @@
         var leftEye = createEye(two, -30, 0);
 
         var monsterBody = two.makeGroup(blob, rightEye, leftEye);
-        monsterBody.translation.set(two.width / 2.0, two.height / 3.0);
+        monsterBody.translation.set(x, y);
     }
 
     Monster.prototype.update = function() {
