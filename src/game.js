@@ -21,8 +21,9 @@
     namedEntities['monster2'] = monster;
 
     two.bind('update', function() {
+        var time = two.timeDelta / 1000 || 1 / 60;
         for (var i = 0; i < entities.length; ++i) {
-            entities[i].update();
+            entities[i].update(time);
         }
 
     }).play();

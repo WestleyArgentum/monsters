@@ -20,7 +20,7 @@
         this.whole.translation.set(x, y);
     }
 
-    Monster.prototype.update = function() {
+    Monster.prototype.update = function(time) {
         for (var i = 0; i < this.blob.vertices.length; i++) {
             var v = this.blob.vertices[i];
             var d = v.destination;
