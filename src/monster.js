@@ -5,14 +5,16 @@
         MONSTER_MORPH_RATE = 0.0125;
 
     var Monster = root.Monster = function(two, x, y) {
-        var blob = this.blob = two.makeCircle(two.width / 2, two.height / 2, two.height / 3);
+        var blob = this.blob = two.makeCircle(0, 0, two.height / 3);
         blob.fill = 'purple';
         blob.noStroke();
-
-        createEye(two, two.width / 2 + 30, two.height / 2);
-        createEye(two, two.width / 2 - 30, two.height / 2);
-
         randBodyDestinations(blob);
+
+        var rightEye = createEye(two, 30, 0);
+        var leftEye = createEye(two, -30, 0);
+
+        var monsterBody = two.makeGroup(blob, rightEye, leftEye);
+        monsterBody.translation.set(two.width / 2.0, two.height / 3.0);
     }
 
     Monster.prototype.update = function() {
@@ -33,12 +35,17 @@
     // *******
 
     function createEye(two, x, y) {
-        var eyeLeftOuter = two.makeCircle(x, y, 25);
-        eyeLeftOuter.fill = 'violet';
-        eyeLeftOuter.noStroke();
+        var eyeOuter = two.makeCircle(0, 0, 25);
+        eyeOuter.fill = 'violet';
+        eyeOuter.noStroke();
 
-        var eyeLeftInner = two.makeCircle(x, y, 13);
-        eyeLeftInner.fill = 'black';
+        var eyeInner = two.makeCircle(0, 0, 13);
+        eyeInner.fill = 'black';
+
+        var eye = two.makeGroup(eyeOuter, eyeInner);
+        eye.translation.set(x, y);
+
+        return eye;
     }
 
     function scaleEye(eye, scaleOuter, scaleInner) {
