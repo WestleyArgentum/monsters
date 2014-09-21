@@ -11,7 +11,6 @@
     Engine.clear = function() {
         Engine.entities = [];
         Engine.namedEntities = {};
-        Engine.levels = {};
         Engine.level = null;
     }
 
