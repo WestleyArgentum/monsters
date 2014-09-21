@@ -50,7 +50,10 @@
     // *******
 
     function randEyeDestination(monster) {
-        var dest = new Two.Vector(Math.random() * MONSTER_EYE_WANDER_RANGE, Math.random() * MONSTER_EYE_WANDER_RANGE);
+        var randX = Math.random() * (Math.random() > 0.5 ? 1 : -1);
+        var randY = Math.random() * (Math.random() > 0.5 ? 1 : -1);
+        var dest = new Two.Vector(randX * MONSTER_EYE_WANDER_RANGE, randY * MONSTER_EYE_WANDER_RANGE);
+
         monster.rightEye.destination = dest;
         monster.leftEye.destination = dest;
     }
