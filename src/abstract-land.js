@@ -5,10 +5,10 @@
         var land = new Land(two);
         Engine.addEntity(land, "abstractLand");
 
-        var monster = new Monster(two, two.width / 4.0 * 3, two.height / 2.0);
+        var monster = new SquishyMonster(two, two.width / 4.0 * 3, two.height / 2.0);
         Engine.addEntity(monster, "monster1");
 
-        var monster2 = new Monster(two, two.width / 4.0, two.height / 3.0);
+        var monster2 = new SquishyMonster(two, two.width / 4.0, two.height / 3.0);
         Engine.addEntity(monster2, "monster2");
     }
 

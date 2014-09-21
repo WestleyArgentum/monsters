@@ -10,7 +10,7 @@
         MONSTER_EYE_WANDER_RANGE = 7,
         MONSTER_EYE_WANDER_CHANCE = 0.009;
 
-    var Monster = root.Monster = function(two, x, y) {
+    var SquishyMonster = root.SquishyMonster = function(two, x, y) {
         this.blob = two.makeCircle(0, 0, MONSTER_BASE_SIZE);
         this.blob.fill = 'purple';
         this.blob.noStroke();
@@ -26,7 +26,7 @@
         this.leftEye.destination = new Two.Vector();
     }
 
-    Monster.prototype.update = function(time) {
+    SquishyMonster.prototype.update = function(time) {
         for (var i = 0; i < this.blob.vertices.length; i++) {
             var v = this.blob.vertices[i];
             var d = v.destination;
