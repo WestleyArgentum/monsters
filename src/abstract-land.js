@@ -10,6 +10,19 @@
 
         var monster2 = new SquishyMonster(two, two.width / 4.0, two.height / 3.0);
         Engine.addEntity(monster2, 'monster2');
+
+        // secret key press to make monsters go PFFF
+        $(document).bind('keypress', function(e) {
+            var code = e.keyCode || e.which;
+            var level;
+
+            switch(code) {
+                case 'F'.charCodeAt():
+                    monster.goPfff();
+                    monster2.goPfff();
+                    break;
+            }
+        });
     }
 
     var Land = function(two) {

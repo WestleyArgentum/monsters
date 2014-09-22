@@ -32,30 +32,37 @@
     SquishyMonster.prototype.update = function(time) {
         if (this.animationTime <= 0.0) {
             if (Math.random() < 0.1) {
-                this.animationFn = updateGoPfff;
-                this.animationTime = Math.random() * 6 + 4;
-
-                var blob = this.blob;
-                for (var i = 0; i < blob.vertices.length; i++) {
-                    var theta = (i + 1) / blob.vertices.length * Math.PI * 2,
-                        x = MONSTER_BASE_SIZE * Math.cos(theta),
-                        y = MONSTER_BASE_SIZE * Math.sin(theta);
-
-                    blob.vertices[i].destination = new Two.Vector(x, y);
-                }
-
-                this.rightEye.destination = new Two.Vector();
-                this.leftEye.destination = new Two.Vector();
-
+                this.goPfff(this, time);
             } else {
-                randBodyDestinations(this.blob);
-                this.animationFn = updateIdleSquishy;
-                this.animationTime = Math.random() * 10 + 4;
+                this.idleSquishy(this, time);
             }
         } else {
             this.animationTime -= time;
             this.animationFn(this, time);
         }
+    }
+
+    SquishyMonster.prototype.goPfff = function () {
+        this.animationFn = updateGoPfff;
+        this.animationTime = Math.random() * 6 + 4;
+
+        var blob = this.blob;
+        for (var i = 0; i < blob.vertices.length; i++) {
+            var theta = (i + 1) / blob.vertices.length * Math.PI * 2,
+                x = MONSTER_BASE_SIZE * Math.cos(theta),
+                y = MONSTER_BASE_SIZE * Math.sin(theta);
+
+            blob.vertices[i].destination = new Two.Vector(x, y);
+        }
+
+        this.rightEye.destination = new Two.Vector();
+        this.leftEye.destination = new Two.Vector();
+    }
+
+    SquishyMonster.prototype.idleSquishy = function() {
+        randBodyDestinations(this.blob);
+        this.animationFn = updateIdleSquishy;
+        this.animationTime = Math.random() * 10 + 4;
     }
 
     // *******
