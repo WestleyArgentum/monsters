@@ -32,9 +32,9 @@
     SquishyMonster.prototype.update = function(time) {
         if (this.animationTime <= 0.0) {
             if (Math.random() < 0.1) {
-                this.goPfff(this, time);
+                this.goPfff();
             } else {
-                this.idleSquishy(this, time);
+                this.idleSquishy();
             }
         } else {
             this.animationTime -= time;
