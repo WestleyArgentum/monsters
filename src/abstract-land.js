@@ -14,8 +14,6 @@
         // secret key press to make monsters go PFFF
         $(document).bind('keypress', function(e) {
             var code = e.keyCode || e.which;
-            var level;
-
             switch(code) {
                 case 'F'.charCodeAt():
                     monster.goPfff();
